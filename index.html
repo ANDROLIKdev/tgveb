@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram WebApp</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1 id="greeting">Привет, гость!</h1>
-        <p>Добро пожаловать в наше WebApp!</p>
-        <button id="action-btn">Нажми меня</button>
-    </div>
-
-    <script src="script.js"></script>
+    <h1>Привет, Telegram!</h1>
+    <p id="user-info">Загрузка...</p>
+    <button id="send-data">Отправить данные в бота</button>
 </body>
 </html>

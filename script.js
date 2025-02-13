@@ -1,15 +1,24 @@
-let tg = window.Telegram.WebApp;
-tg.expand(); // Растягиваем WebApp на весь экран
+document.addEventListener("DOMContentLoaded", () => {
+    const tg = window.Telegram.WebApp;  // API Telegram WebApp
+    tg.expand();  // Раскрываем WebApp на весь экран
 
-// Проверяем тему Telegram (светлая/тёмная)
-document.body.classList.toggle("dark", tg.colorScheme === "dark");
+    const userInfo = document.getElementById("user-info");
+    const sendDataBtn = document.getElementById("send-data");
 
-// Показываем имя пользователя
-if (tg.initDataUnsafe.user) {
-    document.getElementById("greeting").innerText = `Привет, ${tg.initDataUnsafe.user.first_name}!`;
-}
+    if (tg.initDataUnsafe.user) {
+        userInfo.innerHTML = `Привет, ${tg.initDataUnsafe.user.first_name}!`;
+    } else {
+        userInfo.innerHTML = "Не удалось получить данные.";
+    }
 
-// Добавляем обработчик кнопки
-document.getElementById("action-btn").addEventListener("click", () => {
-    tg.showAlert("Ты нажал на кнопку!");
+    sendDataBtn.addEventListener("click", () => {
+        const data = {
+            first_name: tg.initDataUnsafe.user?.first_name || "Неизвестный",
+            last_name: tg.initDataUnsafe.user?.last_name || "",
+            id: tg.initDataUnsafe.user?.id || 0
+        };
+
+        tg.sendData(JSON.stringify(data)); // Отправка данных в бота
+        tg.close(); // Закрываем WebApp
+    });
 });
